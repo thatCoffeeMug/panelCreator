@@ -6,28 +6,35 @@ import java.awt.event.*;
 
 // JButton b=new JButton(new ImageIcon("D:\\icon.png"));
 class panelCreator implements ActionListener{
+
+    // Select type of panel to create
     final static String[] types = {"Estándar", "De imágenes"};
+
+    // General layout for window
     JFrame frame;
-    CardLayout card;
+    CardLayout card;                        // Layout Manager to switch between
+                                            // different types of panels in the
+                                            // show
 
-    JMenuBar mb;
+    JMenuBar mb;                            // Top menu bar
 
-    JPanel mPanel;
+    JPanel mPanel;                          // Buttons and components to create
+                                            // a panel
         JPanel chooserPanel;
             JLabel typeLabel;
-            JComboBox<String> optionsTypes;
+            JComboBox<String> optionsTypes; // Selects type of panel
         JPanel creatorPanel;
 
-            PanelStd stdPanel;
+            PanelStd stdPanel;              // Standard type of panel
 
-            JPanel imgPanel;
+            JPanel imgPanel;                // Images type of panel
 
-    JPanel saveClosePanel;
+    JPanel saveClosePanel;                  // Bottom buttons to save or close
         JButton saveB;
         JButton closeB;
 
     public static void main(String args[]) {
-        new panelCreator();
+        new panelCreator();                 // New instance of frame
     }
 
     public panelCreator(){
@@ -35,21 +42,23 @@ class panelCreator implements ActionListener{
         //Creating the Frame
         frame = new JFrame("Create panel");                     // Make frame
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   // "X" to close
-        frame.setSize(400, 600);                                // Set size
+        frame.setSize(400, 650);                                // Set size
         frame.setLocationRelativeTo(null);                      // Center frame
 
         card = new CardLayout();
 
         //Creating the MenuBar and adding components
         mb = new JMenuBar();
-        JMenu m1 = new JMenu("FILE");
 
-            JMenuItem m11 = new JMenuItem("Open");
-            m1.add(m11);
-            JMenuItem m22 = new JMenuItem("Save as");
-            m1.add(m22);
+            JMenu m1 = new JMenu("FILE");
 
-        JMenu m2 = new JMenu("Help");
+                JMenuItem m11 = new JMenuItem("Open");
+                m1.add(m11);
+                JMenuItem m22 = new JMenuItem("Save as");
+                m1.add(m22);
+
+            JMenu m2 = new JMenu("Help");
+
         mb.add(m1);
         mb.add(m2);
 
@@ -66,7 +75,7 @@ class panelCreator implements ActionListener{
             // Panel creator
             creatorPanel = new JPanel(card);
 
-                stdPanel = new PanelStd();
+                stdPanel = new PanelStd(new BorderLayout());
 
                 imgPanel = new JPanel();
 
