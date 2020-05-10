@@ -114,4 +114,8 @@ Dimension dims = new Dimension(5,28);
         this.add(BorderLayout.NORTH, questPanel);
         this.add(BorderLayout.CENTER, tp);
     }
+
+    public void save(){
+        
+    }
 }
