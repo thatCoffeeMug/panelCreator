@@ -2,7 +2,7 @@
 
 VPATH = ./src
 CLASS_DIR= class
-TARGET=gui.jar
+TARGET=panelCreator.jar
 # define a variable for compiler flags (JFLAGS) (-d points to class' dir)
 # define a variable for the compiler (JC)
 # define a variable for the Java Virtual Machine (JVM)
@@ -43,7 +43,7 @@ FILE=
 #         Simulator.java
 
 CLASSES = \
-	gui.java \
+	panelCreator.java \
 
 
 #
@@ -51,7 +51,7 @@ CLASSES = \
 # method
 #
 
-MAIN = gui
+MAIN = panelCreator
 
 #
 # the default make target entry
