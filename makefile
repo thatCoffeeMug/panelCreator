@@ -10,7 +10,7 @@ TARGET=panelCreator.jar
 # make run FILE="Algo.csv" para sobre escribir el valor de FILE.
 
 JFLAGS = -g -d $(CLASS_DIR)
-JC = javac
+JC = javac -Xlint
 JVM= java
 FILE=
 
@@ -44,6 +44,7 @@ FILE=
 
 CLASSES = \
 	panelCreator.java \
+	PanelStd.java
 
 
 #
@@ -68,15 +69,13 @@ default: jar
 # with the .class suffix AND adding directory class
 #
 
-jar $(TARGET): $(addprefix $(CLASS_DIR)/, $(CLASSES:.java=.class))
-	jar -v --create --file $(TARGET) --main-class $(MAIN)  -C $(CLASS_DIR)  $(CLASSES:.java=.class)
+# Compile all classes at the same time. JAVA cannot compile classes individually
 
-#
-# Next lines contain target class for each .java source file in SRC_DIR
-#
+jar $(TARGET): $(CLASSES)
+	$(JC) $(JFLAGS) $(addprefix $(VPATH)/, $(CLASSES))
 
-$(CLASS_DIR)/%.class : %.java
-	$(JC) $(JFLAGS) $<
+	jar -v --create --file $(TARGET) --main-class $(MAIN) \
+	$(addprefix -C $(CLASS_DIR) , $(CLASSES:.java=.class))
 
 # Next two lines contain a target for running the program
 # Remember the tab in the second line.

@@ -15,10 +15,10 @@ class panelCreator implements ActionListener{
     JPanel mPanel;
         JPanel chooserPanel;
             JLabel typeLabel;
-            JComboBox optionsTypes;
+            JComboBox<String> optionsTypes;
         JPanel creatorPanel;
 
-            JPanel stdPanel;
+            PanelStd stdPanel;
 
             JPanel imgPanel;
 
@@ -58,7 +58,7 @@ class panelCreator implements ActionListener{
         mPanel.setLayout(new BoxLayout (mPanel, BoxLayout.Y_AXIS));
             chooserPanel = new JPanel();
                 typeLabel = new JLabel("Tipo:");
-                optionsTypes = new JComboBox(types);
+                optionsTypes = new JComboBox<String>(types);
                 optionsTypes.addActionListener(this);
             chooserPanel.add(typeLabel);
             chooserPanel.add(optionsTypes);
@@ -66,7 +66,7 @@ class panelCreator implements ActionListener{
             // Panel creator
             creatorPanel = new JPanel(card);
 
-                stdPanel = new JPanel();
+                stdPanel = new PanelStd();
 
                 imgPanel = new JPanel();
 
