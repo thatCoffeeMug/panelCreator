@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import std.*;
+import img.*;
 
 // JButton b=new JButton(new ImageIcon("D:\\icon.png"));
 public class panelCreator implements ActionListener{
@@ -34,7 +35,7 @@ public class panelCreator implements ActionListener{
 
             PanelStd stdPanel;              // Standard type of panel
 
-            JPanel imgPanel;                // Images type of panel
+            PanelImg imgPanel;                // Images type of panel
 
     JPanel saveClosePanel;                  // Bottom buttons to save or close
         JButton saveB;
@@ -94,7 +95,7 @@ public class panelCreator implements ActionListener{
 
                 stdPanel = new PanelStd(new BorderLayout());
 
-                imgPanel = new JPanel();
+                imgPanel = new PanelImg();
 
             creatorPanel.add(types[0], stdPanel);
             creatorPanel.add(types[1], imgPanel);
