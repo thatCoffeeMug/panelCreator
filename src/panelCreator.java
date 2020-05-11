@@ -4,8 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import std.*;
+
 // JButton b=new JButton(new ImageIcon("D:\\icon.png"));
-class panelCreator implements ActionListener{
+public class panelCreator implements ActionListener{
 
     Dimension dims = new Dimension(5,28);
     // Select type of panel to create

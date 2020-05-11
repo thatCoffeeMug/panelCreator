@@ -9,7 +9,8 @@ TARGET=panelCreator.jar
 # define a variable for a parameter. When you run make, you could use:
 # make run FILE="Algo.csv" para sobre escribir el valor de FILE.
 
-JFLAGS = -g -d $(CLASS_DIR)
+JFLAGS = -g
+JBASE = -d $(CLASS_DIR)
 JC = javac -Xlint
 JVM= java
 FILE=
@@ -44,8 +45,8 @@ FILE=
 
 CLASSES = \
 	panelCreator.java \
-	PanelStd.java \
-	StdFile.java
+	std/PanelStd.java \
+	std/StdFile.java
 
 
 #
@@ -72,8 +73,8 @@ default: jar
 
 # Compile all classes at the same time. JAVA cannot compile classes individually
 
-jar $(TARGET): $(CLASSES)
-	$(JC) $(JFLAGS) $(addprefix $(VPATH)/, $(CLASSES))
+jar $(TARGET): $(addprefix $(VPATH)/, $(CLASSES))
+	$(JC) $(JFLAGS) $(JBASE) $(addprefix $(VPATH)/, $(CLASSES))
 
 	jar -v --create --file $(TARGET) --main-class $(MAIN) \
 	$(addprefix -C $(CLASS_DIR) , $(CLASSES:.java=.class))

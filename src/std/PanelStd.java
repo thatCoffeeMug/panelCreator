@@ -1,10 +1,12 @@
+package std;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
 @SuppressWarnings("serial")
-class PanelStd extends JPanel{
+public class PanelStd extends JPanel{
 private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
 private static final Insets EAST_INSETS = new Insets(5, 5, 5, 0);
 
