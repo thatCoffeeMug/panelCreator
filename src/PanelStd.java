@@ -1,15 +1,19 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 
 @SuppressWarnings("serial")
 class PanelStd extends JPanel{
 private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
 private static final Insets EAST_INSETS = new Insets(5, 5, 5, 0);
 
+StdFile stdFile;
+
 JPanel questPanel;
     JLabel questLabel;
     JTextField questText;
+    JLabel ansLabel;
 
 JTabbedPane tp;
 
@@ -46,12 +50,14 @@ Dimension dims = new Dimension(5,28);
     // Creates a new JPanel with a double buffer and a flow layout.
     public PanelStd(LayoutManager layout, boolean isDoubleBuffered){
         super(layout, isDoubleBuffered);
+        stdFile = new StdFile();
 
         questPanel = new JPanel();
         questPanel.setLayout(new GridBagLayout());
             questLabel = new JLabel("Pregunta:");
             questText = new JTextField(30);
             questText.setPreferredSize(dims);
+            ansLabel = new JLabel("Respuestas:");
 
         GridBagConstraints c = new GridBagConstraints();
         c.anchor = GridBagConstraints.NORTHWEST;
@@ -63,6 +69,12 @@ Dimension dims = new Dimension(5,28);
         c.gridx = 0;
         c.gridy = 1;
         questPanel.add(questText,c);
+
+        c.gridx = 0;
+        c.gridy = 2;
+        c.anchor = GridBagConstraints.WEST;
+        c.insets = new Insets(20,0,5,0);
+        questPanel.add(ansLabel, c);
 
         tp = new JTabbedPane();
 
@@ -115,7 +127,37 @@ Dimension dims = new Dimension(5,28);
         this.add(BorderLayout.CENTER, tp);
     }
 
-    public void save(){
-        
+    public int save(JFrame f){
+        String[] correct_ans = new String[rightText.length];
+        for(int i = 0; i < rightText.length; i++){
+            correct_ans[i] = rightText[i].getText();
+        }
+        if(stdFile.set_correct(correct_ans) < 0){
+            JOptionPane.showMessageDialog(f,
+                        "¡Faltan respuestas correctas por rellenar!.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
+
+        String[] wrong_ans = new String[wrgText.length];
+        for(int i = 0; i < wrgText.length; i++){
+            wrong_ans[i] = wrgText[i].getText();
+        }
+        if(stdFile.set_wrong(wrong_ans) < 0){
+            JOptionPane.showMessageDialog(f,
+                        "¡Faltan respuestas incorrectas por rellenar!.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            return -1;
+        }
+
+
+
+
+
+
+
+        return stdFile.saveFile(f);
     }
 }

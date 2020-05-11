@@ -108,9 +108,9 @@ class panelCreator implements ActionListener{
                 // stdPanel.save((String) optionsTypes.getSelectedItem());
                 String label = (String) optionsTypes.getSelectedItem();
                 if(label == types[0]){
-                    stdPanel.save();
+                    stdPanel.save(frame);
                 } else {
-                    
+
                 }
             }
             else if(e.getSource() == closeB){ // closeB

@@ -44,7 +44,8 @@ FILE=
 
 CLASSES = \
 	panelCreator.java \
-	PanelStd.java
+	PanelStd.java \
+	StdFile.java
 
 
 #
