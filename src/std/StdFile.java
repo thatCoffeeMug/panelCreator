@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
+import org.apache.commons.io.FilenameUtils;
+
 class StdFile{
     String[] correct_items = new String[10];
     String[] wrong_items = new String[6];
@@ -59,6 +61,13 @@ class StdFile{
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
                 //This is where a real application would open the file.
+
+                if (FilenameUtils.getExtension(file.getName()).equalsIgnoreCase("txt")) {
+                    // filename is OK as-is
+                } else {
+                    file = new File(file.toString() + ".txt");  // append .xml if "foo.jpg.xml" is OK
+                    file = new File(file.getParentFile(), FilenameUtils.getBaseName(file.getName())+".txt"); // ALTERNATIVELY: remove the extension (if any) and replace it with ".xml"
+                }
 
                     if(file.exists()){
                         int a=JOptionPane.showConfirmDialog(f,

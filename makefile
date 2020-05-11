@@ -9,10 +9,13 @@ TARGET=panelCreator.jar
 # define a variable for a parameter. When you run make, you could use:
 # make run FILE="Algo.csv" para sobre escribir el valor de FILE.
 
-JFLAGS = -g
-JBASE = -d $(CLASS_DIR)
-JC = javac -Xlint
+# JFLAGS = -g -Xlint
+LIBS = commons-io-2.6.jar
+JBASE = -classpath $(addprefix $(VPATH)/, $(LIBS)) -d $(CLASS_DIR)
+JARFLAGS= -v --create
+JC = javac
 JVM= java
+MANIFEST=MANIFEST.MF
 FILE=
 
 #
@@ -46,7 +49,9 @@ FILE=
 CLASSES = \
 	panelCreator.java \
 	std/PanelStd.java \
-	std/StdFile.java
+	std/StdFile.java \
+	img/PanelImg.java \
+	img/ImgFile.java
 
 
 #
@@ -76,8 +81,10 @@ default: jar
 jar $(TARGET): $(addprefix $(VPATH)/, $(CLASSES))
 	$(JC) $(JFLAGS) $(JBASE) $(addprefix $(VPATH)/, $(CLASSES))
 
-	jar -v --create --file $(TARGET) --main-class $(MAIN) \
-	$(addprefix -C $(CLASS_DIR) , $(CLASSES:.java=.class))
+	jar $(JARFLAGS) --file $(TARGET) \
+	--manifest $(MANIFEST) \
+	$(addprefix -C $(CLASS_DIR) , $(CLASSES:.java=.class)) \
+	# $(addprefix -C $(VPATH) , $(LIBS)) \
 
 # Next two lines contain a target for running the program
 # Remember the tab in the second line.
@@ -94,6 +101,7 @@ run: $(TARGET)
 
 clean:
 	$(RM)  $(CLASS_DIR)/*.class
+
 
 gitadd: $(addprefix $(SRC_DIR), $(CLASSES)) makefile
 	git add $?
