@@ -7,6 +7,7 @@ class StdFile{
     String[] correct_items = new String[10];
     String[] wrong_items = new String[6];
     final String type = "std";
+    String author;
 
     public StdFile(){}
 
@@ -44,7 +45,8 @@ class StdFile{
         } else {return -1;}
     }
 
-    public int saveFile(JFrame f){
+    public int saveFile(JFrame f, String author){
+
         final String userDir = System.getProperty("user.dir");
         final JFileChooser fc = new JFileChooser();
         fc.setCurrentDirectory(new File(userDir));
@@ -85,12 +87,16 @@ class StdFile{
     }
 
     public void compileFile (FileWriter myWriter) throws IOException{
+
+        myWriter.write("1.author=" + author + ";\n");
+        myWriter.write("1.type=" + "std" + ";\n");
+
         for(int i = 0; i < correct_items.length; i++){
-            myWriter.write("item" + (i+1) + "=" + correct_items[i] + "#1;\n");
+            myWriter.write("1.item" + (i+1) + "=" + correct_items[i] + "#1;\n");
         }
 
         for(int i = 0; i < wrong_items.length; i++){
-            myWriter.write("item" + (i+11) + "=" + wrong_items[i] + "#0;\n");
+            myWriter.write("1.item" + (i+11) + "=" + wrong_items[i] + "#0;\n");
         }
 
     }

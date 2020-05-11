@@ -7,6 +7,7 @@ import java.awt.event.*;
 // JButton b=new JButton(new ImageIcon("D:\\icon.png"));
 class panelCreator implements ActionListener{
 
+    Dimension dims = new Dimension(5,28);
     // Select type of panel to create
     final static String[] types = {"Estándar", "De imágenes"};
 
@@ -23,6 +24,10 @@ class panelCreator implements ActionListener{
         JPanel chooserPanel;
             JLabel typeLabel;
             JComboBox<String> optionsTypes; // Selects type of panel
+        JPanel authorPanel;
+            JLabel authorLabel;             // Author label
+            JTextField authorText;          // Author's name
+
         JPanel creatorPanel;
 
             PanelStd stdPanel;              // Standard type of panel
@@ -72,6 +77,16 @@ class panelCreator implements ActionListener{
             chooserPanel.add(typeLabel);
             chooserPanel.add(optionsTypes);
 
+            authorPanel = new JPanel(new FlowLayout());
+                authorLabel = new JLabel("Autor:");
+                authorText = new JTextField(15);
+                authorText.setPreferredSize(dims);
+
+            authorPanel.add(authorLabel);
+            authorPanel.add(authorText);
+
+
+
             // Panel creator
             creatorPanel = new JPanel(card);
 
@@ -83,6 +98,7 @@ class panelCreator implements ActionListener{
             creatorPanel.add(types[1], imgPanel);
 
         mPanel.add(chooserPanel);
+        mPanel.add(authorPanel);
         mPanel.add(creatorPanel);
 
         // Save and close options at bottom
@@ -105,12 +121,20 @@ class panelCreator implements ActionListener{
 
     public void actionPerformed(ActionEvent e){
             if(e.getSource() == saveB){ // saveB
-                // stdPanel.save((String) optionsTypes.getSelectedItem());
                 String label = (String) optionsTypes.getSelectedItem();
-                if(label == types[0]){
-                    stdPanel.save(frame);
-                } else {
 
+                String author = authorText.getText();
+                if(author.equals("")){
+                    JOptionPane.showMessageDialog(frame,
+                                "¡Autor no encontrado!",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
+                } else {
+                    if(label == types[0]){
+                        stdPanel.save(frame, author);
+                    } else {
+
+                    }
                 }
             }
             else if(e.getSource() == closeB){ // closeB

@@ -29,7 +29,6 @@ JPanel wrgPanelGroup;
     JLabel[] wrgLabel = new JLabel[6];
     JTextField[] wrgText = new JTextField[6];
 
-
 Dimension dims = new Dimension(5,28);
 
     // Creates a new JPanel with a double buffer and a flow layout.
@@ -127,7 +126,7 @@ Dimension dims = new Dimension(5,28);
         this.add(BorderLayout.CENTER, tp);
     }
 
-    public int save(JFrame f){
+    public int save(JFrame f, String author){
         String[] correct_ans = new String[rightText.length];
         for(int i = 0; i < rightText.length; i++){
             correct_ans[i] = rightText[i].getText();
@@ -152,12 +151,8 @@ Dimension dims = new Dimension(5,28);
             return -1;
         }
 
+        stdFile.author = author;
 
-
-
-
-
-
-        return stdFile.saveFile(f);
+        return stdFile.saveFile(f, author);
     }
 }
