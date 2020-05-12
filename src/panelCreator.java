@@ -12,7 +12,7 @@ public class panelCreator implements ActionListener{
 
     Dimension dims = new Dimension(5,28);
     // Select type of panel to create
-    final static String[] types = {"Estándar", "De imágenes"};
+    final static String[] types = {"Estándar", "Imágenes"};
 
     // General layout for window
     JFrame frame;
@@ -97,7 +97,7 @@ public class panelCreator implements ActionListener{
 
                 imgPanel = new PanelImg();
 
-            creatorPanel.add(types[0], stdPanel);
+            creatorPanel.add(types[0], stdPanel); // Add standard panel creator to options
             creatorPanel.add(types[1], imgPanel);
 
         mPanel.add(chooserPanel);
@@ -140,7 +140,7 @@ public class panelCreator implements ActionListener{
                     }
                 }
             }
-            else if(e.getSource() == closeB){ // closeB
+            else if(e.getSource() == closeB){ // Close program
                 frame.dispose();
             }
             else if(e.getSource() == optionsTypes){
