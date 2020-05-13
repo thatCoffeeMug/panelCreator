@@ -22,9 +22,8 @@ JTabbedPane tp; // Tabbed panels (lists of right and wrong asnwers)
         JPanel[] rightImgP = new JImageLocation[10];
 
     JPanel wrongP;
-        JLabel[] wrongImgL = new JLabel[6];
-        JTextField[] wrongImgTF = new JTextField[6];
-        JButton[] wrongImgBtn = new JButton[10];
+        JPanel[] wrongImgP = new JImageLocation[6];
+
 
     // Creates a new JPanel with a double buffer and a flow layout.
     public PanelImg(){
@@ -75,14 +74,10 @@ JTabbedPane tp; // Tabbed panels (lists of right and wrong asnwers)
         JScrollPane rightpscroll = new JScrollPane(rightP);
 
         c = new GridBagConstraints();
-        // c.anchor = GridBagConstraints.CENTER;
-        // c.insets = new Insets(0,0,0,0);
-        // c.ipadx = 200;
-        // c.ipady = 50;
-        // c.gridwidth = 4;
+        c.anchor = GridBagConstraints.CENTER;
+        c.insets = new Insets(5,0,5,0);
 
-        // for(int i = 0; i < rightImgP.length; i++){
-        for(int i = 0; i < 1; i++){
+        for(int i = 0; i < rightImgP.length; i++){
             rightImgP[i] = new JImageLocation(i+1);
             c.gridy = i;
 
@@ -96,41 +91,17 @@ JTabbedPane tp; // Tabbed panels (lists of right and wrong asnwers)
         wrongP = new JPanel(new GridBagLayout());
         JScrollPane wrongpscroll = new JScrollPane(wrongP);
 
+
         c = new GridBagConstraints();
-        c.anchor = GridBagConstraints.NORTH;
+        c.anchor = GridBagConstraints.CENTER;
+        c.insets = new Insets(5,0,5,0);
 
-        for(int i = 0; i < wrongImgL.length; i++){
-
-
-
-            wrongImgL[i] = new JLabel("Imagen " + (i+1) + ":");
-            wrongImgTF[i] = new JTextField(20);
-            wrongImgTF[i].setPreferredSize(dims);
-            wrongImgBtn[i] = new JButton("...");
-
-            c.weightx = 0;
-            c.weighty = 0;
-            c.insets = new Insets(0,0,5,0);
-            c.gridx = 0;
+        for(int i = 0; i < wrongImgP.length; i++){
+            wrongImgP[i] = new JImageLocation(i+1);
             c.gridy = i;
-            c.gridwidth = 1;
-            wrongP.add(wrongImgL[i], c);
 
-            c.weightx = 0;
-            c.weighty = 0;
-            c.insets = new Insets(0,10,5,0);
-            c.gridx = 1;
-            c.gridy = i;
-            c.gridwidth = 2;
-            wrongP.add(wrongImgTF[i], c);
+            wrongP.add(wrongImgP[i], c);
 
-            c.weightx = 0;
-            c.weighty = 0;
-            c.insets = new Insets(0,10,5,0);
-            c.gridx = 4;
-            c.gridy = i;
-            c.gridwidth = 2;
-            wrongP.add(wrongImgBtn[i], c);
         }
 
 
