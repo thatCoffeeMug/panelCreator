@@ -51,15 +51,9 @@ CLASSES = \
 	std/PanelStd.java \
 	std/StdFile.java \
 	img/PanelImg.java \
-	img/ImgFile.java
+	img/ImgFile.java \
+	img/JImageLocation.java
 
-
-#
-# MAIN is a variable with the name of the class AND file containing the main
-# method
-#
-
-MAIN = panelCreator
 
 #
 # the default make target entry

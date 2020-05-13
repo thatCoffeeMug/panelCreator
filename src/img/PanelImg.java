@@ -19,9 +19,7 @@ JLabel ansL;
 
 JTabbedPane tp; // Tabbed panels (lists of right and wrong asnwers)
     JPanel rightP;
-        JLabel[] rightImgL = new JLabel[10];
-        JTextField[] rightImgTF = new JTextField[10];
-        JButton[] rightImgBtn = new JButton[10];
+        JPanel[] rightImgP = new JImageLocation[10];
 
     JPanel wrongP;
         JLabel[] wrongImgL = new JLabel[6];
@@ -77,39 +75,18 @@ JTabbedPane tp; // Tabbed panels (lists of right and wrong asnwers)
         JScrollPane rightpscroll = new JScrollPane(rightP);
 
         c = new GridBagConstraints();
-        c.anchor = GridBagConstraints.NORTH;
+        // c.anchor = GridBagConstraints.CENTER;
+        // c.insets = new Insets(0,0,0,0);
+        // c.ipadx = 200;
+        // c.ipady = 50;
+        // c.gridwidth = 4;
 
-        for(int i = 0; i < rightImgL.length; i++){
-
-
-            rightImgL[i] = new JLabel("Imagen " + (i+1) + ":");
-            rightImgTF[i] = new JTextField(20);
-            rightImgTF[i].setPreferredSize(dims);
-            rightImgBtn[i] = new JButton("...");
-
-            c.weightx = 0;
-            c.weighty = 0;
-            c.insets = new Insets(0,0,5,0);
-            c.gridx = 0;
+        // for(int i = 0; i < rightImgP.length; i++){
+        for(int i = 0; i < 1; i++){
+            rightImgP[i] = new JImageLocation(i+1);
             c.gridy = i;
-            c.gridwidth = 1;
-            rightP.add(rightImgL[i], c);
 
-            c.weightx = 0;
-            c.weighty = 0;
-            c.insets = new Insets(0,10,5,0);
-            c.gridx = 1;
-            c.gridy = i;
-            c.gridwidth = 2;
-            rightP.add(rightImgTF[i], c);
-
-            c.weightx = 0;
-            c.weighty = 0;
-            c.insets = new Insets(0,10,5,0);
-            c.gridx = 4;
-            c.gridy = i;
-            c.gridwidth = 2;
-            rightP.add(rightImgBtn[i], c);
+            rightP.add(rightImgP[i], c);
 
         }
 
@@ -123,6 +100,7 @@ JTabbedPane tp; // Tabbed panels (lists of right and wrong asnwers)
         c.anchor = GridBagConstraints.NORTH;
 
         for(int i = 0; i < wrongImgL.length; i++){
+
 
 
             wrongImgL[i] = new JLabel("Imagen " + (i+1) + ":");
@@ -152,7 +130,7 @@ JTabbedPane tp; // Tabbed panels (lists of right and wrong asnwers)
             c.gridx = 4;
             c.gridy = i;
             c.gridwidth = 2;
-            rightP.add(wrongImgBtn[i], c);
+            wrongP.add(wrongImgBtn[i], c);
         }
 
 
