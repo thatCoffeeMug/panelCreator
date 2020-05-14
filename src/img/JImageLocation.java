@@ -5,8 +5,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
+
+import org.apache.commons.io.FilenameUtils;
+
 class JImageLocation extends JPanel implements ActionListener{
 
+final private String[] extensions = {"jpg", "jpeg", "png"};
 
 Dimension dims = new Dimension(0,28);
 
@@ -41,10 +45,28 @@ Dimension dims = new Dimension(0,28);
         add(butL);
     }
 
-
     public boolean fileExists(){
         if(file == null){return false;}
         else{return true;}
+    }
+
+    public File getFile(){
+        if(fileExists()){
+            return file;
+        } else {
+            return null;
+        }
+    }
+
+    public boolean checkImg(){
+        if(fileExists()){
+            String ext = FilenameUtils.getExtension(file.getName());
+            for(int i = 0; i < extensions.length; i++){
+                if(ext.toLowerCase().equals(extensions[i])){return true;}
+            }
+
+            return false;
+        } else {return false;}
     }
 
     public void actionPerformed(ActionEvent e){
@@ -55,9 +77,15 @@ Dimension dims = new Dimension(0,28);
 
             int returnVal = fc.showOpenDialog(this);
             if (returnVal == JFileChooser.APPROVE_OPTION){
-                System.out.println("Everything a ok!");
                 this.file = fc.getSelectedFile();
-                tfL.setText(file.getName());
+                if(checkImg()){
+                    tfL.setText(file.getName());
+                } else {
+                    JOptionPane.showMessageDialog(this,
+                                "El archivo no tiene formato de imagen",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
+                }
             }
 
         }

@@ -49,7 +49,7 @@ class StdFile{
         } else {return -1;}
     }
 
-    public int saveFile(JFrame f, String author){
+    public int saveFile(JPanel f, String author){
 
         final String userDir = System.getProperty("user.dir");
         final JFileChooser fc = new JFileChooser();

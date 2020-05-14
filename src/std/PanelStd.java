@@ -128,13 +128,13 @@ Dimension dims = new Dimension(5,28);
         this.add(BorderLayout.CENTER, tp);
     }
 
-    public int save(JFrame f, String author){
+    public int save(String author){
         String[] correct_ans = new String[rightText.length];
         for(int i = 0; i < rightText.length; i++){
             correct_ans[i] = rightText[i].getText();
         }
         if(stdFile.set_correct(correct_ans) < 0){
-            JOptionPane.showMessageDialog(f,
+            JOptionPane.showMessageDialog(this,
                         "¡Faltan respuestas correctas por rellenar!.",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
@@ -146,7 +146,7 @@ Dimension dims = new Dimension(5,28);
             wrong_ans[i] = wrgText[i].getText();
         }
         if(stdFile.set_wrong(wrong_ans) < 0){
-            JOptionPane.showMessageDialog(f,
+            JOptionPane.showMessageDialog(this,
                         "¡Faltan respuestas incorrectas por rellenar!.",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
@@ -155,6 +155,6 @@ Dimension dims = new Dimension(5,28);
 
         stdFile.author = author;
 
-        return stdFile.saveFile(f, author);
+        return stdFile.saveFile(this, author);
     }
 }

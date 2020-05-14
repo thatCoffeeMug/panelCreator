@@ -133,10 +133,10 @@ public class panelCreator implements ActionListener{
                                 "Error",
                                 JOptionPane.ERROR_MESSAGE);
                 } else {
-                    if(label == types[0]){
-                        stdPanel.save(frame, author);
-                    } else {
-
+                    if(label == types[0]){ // std
+                        stdPanel.save(author);
+                    } else if(label == types[1]) { // img
+                        imgPanel.save(author);
                     }
                 }
             }

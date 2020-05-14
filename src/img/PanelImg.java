@@ -5,8 +5,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
+
+
 @SuppressWarnings("serial")
-public class PanelImg extends JPanel{
+public class PanelImg extends JPanel implements ActionListener{
 Dimension dims = new Dimension(5,28);
 
 SpringLayout mlayout;
@@ -19,10 +21,12 @@ JLabel ansL;
 
 JTabbedPane tp; // Tabbed panels (lists of right and wrong asnwers)
     JPanel rightP;
-        JPanel[] rightImgP = new JImageLocation[10];
+        JButton rightButton;
+        JImageLocation[] rightImgP = new JImageLocation[1];
 
     JPanel wrongP;
-        JPanel[] wrongImgP = new JImageLocation[6];
+        JButton wrongButton;
+        JImageLocation[] wrongImgP = new JImageLocation[1];
 
 
     // Creates a new JPanel with a double buffer and a flow layout.
@@ -77,9 +81,14 @@ JTabbedPane tp; // Tabbed panels (lists of right and wrong asnwers)
         c.anchor = GridBagConstraints.CENTER;
         c.insets = new Insets(5,0,5,0);
 
+        c.gridy = 0;
+        rightButton = new JButton("Abrir imágenes...");
+        rightButton.addActionListener(this);
+        rightP.add(rightButton, c);
+
         for(int i = 0; i < rightImgP.length; i++){
             rightImgP[i] = new JImageLocation(i+1);
-            c.gridy = i;
+            c.gridy = i+1;
 
             rightP.add(rightImgP[i], c);
 
@@ -96,9 +105,14 @@ JTabbedPane tp; // Tabbed panels (lists of right and wrong asnwers)
         c.anchor = GridBagConstraints.CENTER;
         c.insets = new Insets(5,0,5,0);
 
+        c.gridy = 0;
+        wrongButton = new JButton("Abrir imágenes...");
+        wrongButton.addActionListener(this);
+        wrongP.add(wrongButton, c);
+
         for(int i = 0; i < wrongImgP.length; i++){
             wrongImgP[i] = new JImageLocation(i+1);
-            c.gridy = i;
+            c.gridy = i+1;
 
             wrongP.add(wrongImgP[i], c);
 
@@ -125,7 +139,71 @@ JTabbedPane tp; // Tabbed panels (lists of right and wrong asnwers)
         this.add(tp);
     }
 
+    public int save(String author){
+
+        if(errorWindow(questTF.getText().equals(""),
+                    "¡Falta la pregunta!") < 0){
+            return -1;
+        }
+
+        for(int i = 0; i < rightImgP.length; i++){
+            if(errorWindow(!rightImgP[i].fileExists(),
+                        "¡Falta la imagen " + i + " (respuestas correctas) !") < 0)
+            {return -1;}
+        }
+
+        for(int i = 0; i < wrongImgP.length; i++){
+            if(errorWindow(!wrongImgP[i].fileExists(),
+                        "¡Falta la imagen " + i + " (respuestas incorrectas) !") < 0)
+            {return -1;}
+        }
+
+        File[] rightFile = new File[rightImgP.length];
+        File[] wrongFile = new File[wrongImgP.length];
+
+        for(int i = 0; i < rightImgP.length; i++){
+            rightFile[i] = rightImgP[i].getFile();
+        }
+
+        for(int i = 0; i < wrongImgP.length; i++){
+            wrongFile[i] = wrongImgP[i].getFile();
+        }
+
+        ImgFile gamePanel = new ImgFile(rightFile, wrongFile, questTF.getText(),
+                                        author, this);
 
 
+
+
+        gamePanel.saveZip();
+        gamePanel.saveTXT();
+
+        return 0;
+    }
+
+    private int errorWindow(boolean check, String mess){
+        if(check){
+            JOptionPane.showMessageDialog(this,
+                        mess,
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource() == rightButton){
+            asignFiles();
+        } else if(e.getSource() == wrongButton){
+
+        }
+    }
+
+    JFileChooser chooser = new JFileChooser();
+    chooser.setMultiSelectionEnabled(true);
+    chooser.showOpenDialog(frame);
+    File[] files = chooser.getSelectedFiles();
 
 }
