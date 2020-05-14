@@ -10,6 +10,7 @@ import java.io.*;
 @SuppressWarnings("serial")
 public class PanelImg extends JPanel implements ActionListener{
 Dimension dims = new Dimension(5,28);
+final int unitInc_scroll = 16;
 
 SpringLayout mlayout;
 
@@ -22,11 +23,11 @@ JLabel ansL;
 JTabbedPane tp; // Tabbed panels (lists of right and wrong asnwers)
     JPanel rightP;
         JButton rightButton;
-        JImageLocation[] rightImgP = new JImageLocation[1];
+        JImageLocation[] rightImgP = new JImageLocation[10];
 
     JPanel wrongP;
         JButton wrongButton;
-        JImageLocation[] wrongImgP = new JImageLocation[1];
+        JImageLocation[] wrongImgP = new JImageLocation[6];
 
 
     // Creates a new JPanel with a double buffer and a flow layout.
@@ -76,6 +77,7 @@ JTabbedPane tp; // Tabbed panels (lists of right and wrong asnwers)
 
         rightP = new JPanel(new GridBagLayout());
         JScrollPane rightpscroll = new JScrollPane(rightP);
+        rightpscroll.getVerticalScrollBar().setUnitIncrement(unitInc_scroll);
 
         c = new GridBagConstraints();
         c.anchor = GridBagConstraints.CENTER;
@@ -99,7 +101,7 @@ JTabbedPane tp; // Tabbed panels (lists of right and wrong asnwers)
 
         wrongP = new JPanel(new GridBagLayout());
         JScrollPane wrongpscroll = new JScrollPane(wrongP);
-
+        wrongpscroll.getVerticalScrollBar().setUnitIncrement(unitInc_scroll);
 
         c = new GridBagConstraints();
         c.anchor = GridBagConstraints.CENTER;
@@ -195,15 +197,35 @@ JTabbedPane tp; // Tabbed panels (lists of right and wrong asnwers)
 
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == rightButton){
-            asignFiles();
+            asignFiles(this.rightImgP);
         } else if(e.getSource() == wrongButton){
-
+            asignFiles(this.wrongImgP);
         }
     }
 
-    JFileChooser chooser = new JFileChooser();
-    chooser.setMultiSelectionEnabled(true);
-    chooser.showOpenDialog(frame);
-    File[] files = chooser.getSelectedFiles();
+    void asignFiles(JImageLocation[] panels){
+
+        final String userDir = System.getProperty("user.dir");
+        final JFileChooser fc = new JFileChooser();
+        fc.setCurrentDirectory(new File(userDir));
+        fc.setMultiSelectionEnabled(true);
+
+        int returnVal = fc.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION){
+            File[] files = fc.getSelectedFiles();
+
+            int len = 0;
+            if(files.length < panels.length){
+                len = files.length;
+            } else {
+                len = panels.length;
+            }
+
+            for(int i = 0; i < len; i++){
+                panels[i].loadImg(files[i]);
+            }
+        }
+
+    }
 
 }

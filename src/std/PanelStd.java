@@ -9,6 +9,8 @@ import java.io.*;
 public class PanelStd extends JPanel{
 private static final Insets WEST_INSETS = new Insets(5, 0, 5, 5);
 private static final Insets EAST_INSETS = new Insets(5, 5, 5, 0);
+final int unitInc_scroll = 16;
+
 
 StdFile stdFile;
 
@@ -81,6 +83,7 @@ Dimension dims = new Dimension(5,28);
 
         ansPanelGroup = new JPanel(new GridBagLayout());
         scrollAns = new JScrollPane(ansPanelGroup);
+        scrollAns.getVerticalScrollBar().setUnitIncrement(unitInc_scroll);
 
         c = new GridBagConstraints();
         c.anchor = GridBagConstraints.CENTER;
@@ -101,6 +104,7 @@ Dimension dims = new Dimension(5,28);
 
         wrgPanelGroup = new JPanel(new GridBagLayout());
         scrollWrg = new JScrollPane(wrgPanelGroup);
+        scrollWrg.getVerticalScrollBar().setUnitIncrement(unitInc_scroll);
 
         c = new GridBagConstraints();
         c.anchor = GridBagConstraints.CENTER;

@@ -11,8 +11,8 @@ import org.apache.commons.io.FilenameUtils;
 
 public class ImgFile{
 
-File[] rightFile = new File[1];
-File[] wrongFile = new File[1];
+File[] rightFile = new File[10];
+File[] wrongFile = new File[6];
 String quest;
 String author;
 PanelImg panel;
