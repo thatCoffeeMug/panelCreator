@@ -12,7 +12,7 @@ TARGET=panelCreator.jar
 # JFLAGS = -g -Xlint
 LIBS = commons-io-2.6.jar
 JBASE = -classpath $(addprefix $(VPATH)/, $(LIBS)) -d $(CLASS_DIR)
-JARFLAGS= -v --create
+JARFLAGS= cvfm
 JC = javac
 JVM= java
 MANIFEST=MANIFEST.MF
@@ -75,10 +75,10 @@ default: jar
 jar $(TARGET): $(addprefix $(VPATH)/, $(CLASSES))
 	$(JC) $(JFLAGS) $(JBASE) $(addprefix $(VPATH)/, $(CLASSES))
 
-	jar $(JARFLAGS) --file $(TARGET) \
-	--manifest $(MANIFEST) \
+	jar $(JARFLAGS) $(TARGET) \
+	$(MANIFEST) \
 	$(addprefix -C $(CLASS_DIR) , $(CLASSES:.java=.class)) \
-	# $(addprefix -C $(VPATH) , $(LIBS)) \
+	$(addprefix -C $(VPATH) , $(LIBS))
 
 # Next two lines contain a target for running the program
 # Remember the tab in the second line.
