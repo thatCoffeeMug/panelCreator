@@ -12,7 +12,7 @@ TARGET=panelCreator.jar
 # JFLAGS = -g -Xlint
 LIBS = commons-io-2.6.jar
 JBASE = -classpath $(addprefix $(VPATH)/, $(LIBS)) -d $(CLASS_DIR)
-JARFLAGS= cvf
+JARFLAGS= cvfm
 JC = javac
 JVM= java
 MANIFEST=MANIFEST.MF
@@ -39,20 +39,14 @@ FILE=
 # is understood as
 # NAME = Camilo        Juan
 
-# CLASSES = \
-#         Experiment.java \
-#         Block.java \
-#         Spring.java \
-#         PhysicsElement.java \
-#         Simulator.java
-
 CLASSES = \
 	panelCreator.java \
 	std/PanelStd.java \
 	std/StdFile.java \
 	img/PanelImg.java \
 	img/ImgFile.java \
-	img/JImageLocation.java
+	img/JImageLocation.java \
+	bmb/PanelBmb.java
 
 
 #
@@ -95,6 +89,7 @@ run: $(TARGET)
 
 clean:
 	$(RM)  $(CLASS_DIR)/*.class
+	$(RM) $(TARGET)
 
 
 gitadd: $(addprefix $(SRC_DIR), $(CLASSES)) makefile

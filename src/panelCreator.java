@@ -6,13 +6,14 @@ import java.awt.event.*;
 
 import std.*;
 import img.*;
+import bmb.*;
 
 // JButton b=new JButton(new ImageIcon("D:\\icon.png"));
 public class panelCreator implements ActionListener{
 
     Dimension dims = new Dimension(5,28);
     // Select type of panel to create
-    final static String[] types = {"Estándar", "Imágenes"};
+    final static String[] types = {"Estándar", "Imágenes", "Bomba"};
 
     // General layout for window
     JFrame frame;
@@ -34,8 +35,8 @@ public class panelCreator implements ActionListener{
         JPanel creatorPanel;
 
             PanelStd stdPanel;              // Standard type of panel
-
             PanelImg imgPanel;                // Images type of panel
+            PanelBmb bmbPanel;
 
     JPanel saveClosePanel;                  // Bottom buttons to save or close
         JButton saveB;
@@ -97,8 +98,11 @@ public class panelCreator implements ActionListener{
 
                 imgPanel = new PanelImg();
 
+                bmbPanel = new PanelBmb();
+
             creatorPanel.add(types[0], stdPanel); // Add standard panel creator to options
             creatorPanel.add(types[1], imgPanel);
+            creatorPanel.add(types[2], bmbPanel);
 
         mPanel.add(chooserPanel);
         mPanel.add(authorPanel);
@@ -137,6 +141,8 @@ public class panelCreator implements ActionListener{
                         stdPanel.save(author);
                     } else if(label == types[1]) { // img
                         imgPanel.save(author);
+                    } else if(label == types[2]) { // bmb
+                        bmbPanel.save(author);
                     }
                 }
             }
