@@ -46,7 +46,8 @@ CLASSES = \
 	img/PanelImg.java \
 	img/ImgFile.java \
 	img/JImageLocation.java \
-	bmb/PanelBmb.java
+	bmb/PanelBmb.java \
+	bmb/JBomb.java
 
 
 #
